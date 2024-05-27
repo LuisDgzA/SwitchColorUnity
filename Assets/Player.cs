@@ -38,18 +38,30 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log(collider.tag);
+        if(collider.tag == "ColorChanger")
+        {
+            SetRandomColor();
+            Destroy(collider.gameObject);
+            return;
+        }
+        if(currentColor != collider.tag)
+        {
+            Debug.Log("Game over!!");
+        }
     }
 
     void SetRandomColor()
     {
-        int index = Random.Range(0, 3);
+        int index = Random.Range(0, 4);
 
         string[] colors = { "Cyan", "Yellow" ,"Magenta", "Pink"};
 
         Color[] colorValues = {colorCyan, colorYellow, colorMagenta, colorPink};
 
-
+        //if(currentColor == colors[index])
+        //{
+        //    SetRandomColor();
+        //}
         currentColor = colors[index];
         spriteRenderer.color = colorValues[index];
     }
